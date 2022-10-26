@@ -15,6 +15,7 @@ server.on('request',function(req,res){
     let urlParams = url.parse(req.url)
     let fileName = path.join('.',urlParams.pathname)
     //fileName có giá trị là 1 đường dẫn tuyệt đối
+    //path.exists không còn hỗ trợ thay bằng fs.exists
     fs.exists(fileName,function(exists){
         if(!exists)
             return genericSend(404,'Not Found',res)
