@@ -8,8 +8,8 @@
     2.res.send => res.sendStatus
     3.app.use(express.bodyParser()) => app.use(express.urlencoded())
       hoặc cài gói bodyParser để sử dụng riêng npm install body-parser 
-[video tham khảo - F8](https://www.youtube.com/watch?v=LlfdqnK28Cg&list=PL_-VfJajZj0VatBpaXkEHK_UPHL7dW6I3&index=16)
     4.app.use(express.logger()) => logger không còn đóng gói chung với express 
       app.use(express.logger()) thay bằng app.use(morgan('combined')) (npm i morgan)
-[video tham khảo - F8](https://youtu.be/seI--u0hSeg?list=PL_-VfJajZj0VatBpaXkEHK_UPHL7dW6I3)
+->3.[video tham khảo - F8](https://www.youtube.com/watch?v=LlfdqnK28Cg&list=PL_-VfJajZj0VatBpaXkEHK_UPHL7dW6I3&index=16)
+->4.[video tham khảo - F8](https://youtu.be/seI--u0hSeg?list=PL_-VfJajZj0VatBpaXkEHK_UPHL7dW6I3)
             
