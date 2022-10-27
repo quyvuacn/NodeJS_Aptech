@@ -1,0 +1,10 @@
+html 
+    head 
+        title= title 
+    body 
+        h1= message
+        div(class="list-class" id="id")
+            ul
+                -for(let i = 0; i <5;i++){
+                    li=i+1+'. Item' +(i+1)
+                -}
