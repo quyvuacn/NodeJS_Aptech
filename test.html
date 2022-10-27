@@ -7,10 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Add Post</h2>
+    
     <form style="display: flex;flex-direction: column;gap: 10px;" action="/articles" method="post">
-        <input type="text" placeholder="Title" name="title">
-        <input type="text" placeholder="Author" name="author">
+        <input type="text" placeholder="Title" name="title" required>
+        <input type="text" placeholder="Author" name="author" required>
         <textarea name="body" placeholder="Content" cols="30" rows="10"></textarea>
         <button>Submit</button>
     </form>

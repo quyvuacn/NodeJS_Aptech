@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S4_5-AJAX</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.6.1.js"></script>
+</head>
+<body>
+    <button onclick="get()">GET</button>
+    
+
+
+    <div>
+        <div id="getResponse"></div>
+        
+    </div>
+    
+    <script>
+        function display(data){
+            let trs = ''
+            data.forEach(el=>{
+               trs+= `<tr>
+                        <td>${el.id}</td>
+                        <td><input id='id${el.id}' type="text" value="${el.name}"></td>
+                        <td>
+                            <button onclick="del(${el.id})">DELETE</button>
+                            <button onclick="put(${el.id})">PUT</button>
+                        </td>
+                </tr>`
+            })
+            trs += `<tr>
+                        <td><input id="post_id" type="number" name="id" placeholder="id"></td>
+                        <td><input id="post_name" type="text" name="name" placeholder="name"></td>
+                        <td>
+                            <button onclick="post()">ADD</button>
+                        </td>
+                    </tr>`
+            let table = `
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                ${trs}
+            </table>
+            `
+            getResponse.innerHTML = table
+        }
+        function get(){
+            $.ajax({
+                type : 'GET',
+                url : 'http://localhost:8080/ajaxcall',
+                dataType : 'json'
+            })
+            .done(function(data){
+                // console.log('GET response: ',JSON.stringify(data,'',2))
+                // $('#getResponse').html(JSON.stringify(data,'',2))
+                display(data)
+            })
+            .fail(function(jqXHR, textStatus, err) {
+                console.log('ERROR:',textStatus)
+            })
+        }
+        function post(){
+            $.ajax({
+                type : 'POST',
+                url : 'http://localhost:8080/ajaxcall',
+                crossDomain : true,
+                contentType : 'application/json;charset=utf-8',
+                dataType : 'json',
+                data : JSON.stringify({
+                    id : post_id.value,
+                    name : post_name.value
+                })
+            })
+            .done(function(data){
+                display(data)
+            })
+            .fail(function(jqXHR, textStatus, err) {
+                console.log('ERROR:',textStatus)
+                alert('ID đã tồn tại')
+            })
+        }
+        function del(id){
+            confirm('Bạn có muốn xóa học sinh này không?') == true ??
+            $.ajax({
+                type : 'DELETE',
+                url : `http://localhost:8080/ajaxcall/${id}`,     
+                dataType : 'json',
+            })
+            .done(function(data){
+                display(data)
+            })
+            .fail(function(jqXHR, textStatus, err) {
+                console.log('ERROR:',textStatus)
+            })
+        }
+        function put(id){
+            let put_name = $(`#id${id}`).val()
+            $.ajax({
+                type : 'PUT',
+                url : `http://localhost:8080/ajaxcall/${id}`,
+                crossDomain : true,
+                contentType : 'application/json;charset=utf-8',
+                dataType : 'json',
+                data : JSON.stringify({
+                    name : put_name
+                })
+            })
+            .done(function(data){
+                display(data)
+            })
+            .fail(function(jqXHR, textStatus, err) {
+                console.log('ERROR:',textStatus)
+            })
+        }
+
+    </script>
+</body>
+</html>
