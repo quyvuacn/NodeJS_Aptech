@@ -25,11 +25,11 @@ app.use(
 	}),
 )
 
-app.use("set-colors", (req, res) => {
+app.get("/set-colors", (req, res) => {
 	req.session.colors = ["red", "green", "yellow", "blue"]
 	res.redirect("/greeting")
 })
-app.use("set-name", (req, res) => {
+app.get("/set-name", (req, res) => {
 	req.cookies.name = "Vũ Viết Quý"
 	res.redirect("/greeting")
 })
