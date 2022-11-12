@@ -1,0 +1,10 @@
+<h1>Greeting</h1>
+<h2>Message</h2>
+<p>{{message}}</p>
+<p>Good morning! {{name}}</p>
+<h2>Style</h2>
+{{#each colors}}
+	<a href="/greeting?color={{this}}">{{this}}</a>
+{{/each}}
+
+<p style="color: {{color}};">/greeting?style={{color}}</p>
