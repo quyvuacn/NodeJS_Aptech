@@ -63,14 +63,3 @@ addNumberPromise(1,2)
 })
 
 
-function addnumbers(x,y){
-    return new Promise(function(resolve,reject){
-        if(typeof x !== 'number'){
-            reject(new Error('The number must be a number'))
-        }
-        if(typeof y !== 'number'){
-            reject(new Error('The number must be a number'))
-        }
-        resolve(x+y)
-    })
-}

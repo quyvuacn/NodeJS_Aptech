@@ -21,11 +21,11 @@ let data = [
     }
 ]
 
-app.get('/ajaxcall',function(req, res){
+app.get('/student',function(req, res){
     res.send(data)
 })
 
-app.post('/ajaxcall',function(req,res,next){
+app.post('/student',function(req,res,next){
     if(!data.find(el=>el.id==req.body.id)){
         data.push(req.body)
         res.send(data)
@@ -34,17 +34,22 @@ app.post('/ajaxcall',function(req,res,next){
     }
     
 })
-app.delete('/ajaxcall/:id',function(req,res){
+app.delete('/student/:id',function(req,res){
     let id = req.params.id
     data = data.filter(el=>el.id != id)
     res.send(data)
 })
-app.put('/ajaxcall/:id',function(req,res){
+app.put('/student/:id',function(req,res){
     let name = req.body.name
     let id = req.params.id
     data.find(el=>el.id == id).name = name
     res.send(data)
 })
 
+
+
+app.get('*',function(req,res){
+    res.redirect('/S4_5-AJAX.html')
+})
 //S4_5-AJAX.html
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
