@@ -25,17 +25,20 @@ app.use(
 	}),
 )
 
-app.use((req, res, next) => {
+app.use("set-colors", (req, res) => {
 	req.session.colors = ["red", "green", "yellow", "blue"]
+	res.redirect("/greeting")
+})
+app.use("set-name", (req, res) => {
 	req.cookies.name = "Vũ Viết Quý"
-	next()
+	res.redirect("/greeting")
 })
 
 app.get("/greeting", (req, res) => {
 	const data = {
 		message: "Hello, world!",
 		color: req.query.color,
-		colors: req.session.colors,
+		colors: req.session.colors || [],
 		name: req.cookies.name,
 	}
 	res.render("ex", data)
