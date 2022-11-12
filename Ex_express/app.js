@@ -20,28 +20,27 @@ app.use(
 	expressSession({
 		secret: "keyboard cat",
 		resave: false,
-		saveUninitialized: true,
-		cookie: { secure: true },
+		saveUninitialized: false,
 	}),
 )
+
+app.get("/greeting", (req, res) => {
+	const data = {
+		message: "Hello, world!",
+		color: req.query.color,
+		colors: req.session.colors,
+		name: req.cookies.name,
+	}
+	res.render("ex", data)
+})
 
 app.get("/set-colors", (req, res) => {
 	req.session.colors = ["red", "green", "yellow", "blue"]
 	res.redirect("/greeting")
 })
 app.get("/set-name", (req, res) => {
-	req.cookies.name = "Vũ Viết Quý"
+	res.cookie("name", "Vũ Viết Quý")
 	res.redirect("/greeting")
-})
-
-app.get("/greeting", (req, res) => {
-	const data = {
-		message: "Hello, world!",
-		color: req.query.color,
-		colors: req.session.colors || [],
-		name: req.cookies.name,
-	}
-	res.render("ex", data)
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
