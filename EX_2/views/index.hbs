@@ -1,0 +1,7 @@
+<h2>CÁC NGÀY NGHỈ LỄ CỦA VIỆT NAM TRONG NĂM 2021</h2>
+
+{{#each holidays}}
+	<h3>{{@index}}. <a href="{{this.link}}">{{this.name}}</a> </h3>
+	<p>{{this.content}}</p>
+	<img src="{{image}}" alt="" />
+{{/each}}
