@@ -50,7 +50,7 @@ app.get("/:holiday", (req, res) => {
 	let holidayName = req.params.holiday
 	let data = holidays.find((holiday) => holiday.link == holidayName)
 	data.title = data.name
-	res.render("tet", data)
+	res.render("holiday", data)
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
